@@ -77,7 +77,11 @@ export default Home = () => {
       <StatusBar backgroundColor='#040617' barStyle='light-content' />
 
       <Header>
-        <Text large>Top Best Games in 2020</Text>
+        <Text large>
+          Hello, <Text large>Isaque</Text>
+          {`\n`}
+          <Text>Top Best Games for you</Text>
+        </Text>
 
         <Avatar source={require('../../assets/avatar.png')} />
       </Header>
