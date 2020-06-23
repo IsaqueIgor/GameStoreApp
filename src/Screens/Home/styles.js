@@ -32,3 +32,11 @@ export const CategoryName = styled.Text`
   color: ${(props) => (props.selected ? '#819ee5' : '#9c9c9c')};
   font-weight: ${(props) => (props.selected ? '700' : '500')};
 `;
+
+export const CategoryDot = styled.View`
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  background-color: #819ee5;
+`;
+export const Games = styled.FlatList``;
