@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect, useRef } from 'react';
 import { StatusBar } from 'react-native';
 
 import {
@@ -8,6 +7,11 @@ import {
   Avatar,
   Categories,
   Games,
+  GameCover,
+  GameInfo,
+  GameImage,
+  Game,
+  GameTitle,
   CategoryName,
   Category,
   CategoryDot,
@@ -15,40 +19,54 @@ import {
 import Text from '../../components/Text';
 import categoriesList from '../../mocks/categories';
 
+import game from '../../mocks/games';
+
 export default Home = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [games, setGames] = useState([]);
+  //const [games, setGames] = useState([]);
+  const gamesRef = useRef();
 
-  let config = {
-    headers: {
-      Accept: 'application/json',
-      'user-key': 'fef5de8a40813da2b9cbe65efd5d4b7d',
-    },
-    params: {
-      fields:
-        'name, cover.url,rating,created_at,genres;limit 15; where rating > 98; sort created_at asc',
-    },
-  };
+  //   let config = {
+  //     headers: {
+  //       Accept: 'application/json',
+  //       'user-key': 'fef5de8a40813da2b9cbe65efd5d4b7d',
+  //     },
+  //     timeout: 500,
+  //     params: {
+  //       'fields name, cover.url,rating,created_at,genres;limit 15; where rating > 9;'
+  //     }
+  //   };
 
-  useEffect(() => {
-    axios
-      .get('https://api-v3.igdb.com/games', config)
-      .then((resp) => {
-        console.log(resp.data);
-        setGames(resp.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
+  //   useEffect(() => {
+  //     axios
+  //       .get('https://api-v3.igdb.com/games', config)
+  //       .then((resp) => {
+  //         console.log(resp.data.name);
+  //         setGames(resp.data);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   });
 
   const changeCategory = (category) => {
+    gamesRef.current.scrollToOffset({ x: 0, y: 0 });
     setSelectedCategory(category);
   };
 
   const GameItem = (game) => {
     return (
-      <Game>
+      <Game onPress={() => {}}>
+        <GameCover source={game.cover} />
+        <GameInfo backgroundColor={game.backgroundColor}>
+          <GameImage source={game.cover} />
+          <GameTitle>
+            <Text medium bold>
+              {game.title}
+            </Text>
+            <Text small>{game.teaser}</Text>
+          </GameTitle>
+        </GameInfo>
         <Text>{game.name}</Text>
       </Game>
     );
@@ -56,7 +74,7 @@ export default Home = () => {
 
   return (
     <Container>
-      <StatusBar backgroundColor='#343434' barStyle='light-content' />
+      <StatusBar backgroundColor='#040617' barStyle='light-content' />
 
       <Header>
         <Text large>Top Best Games in 2020</Text>
@@ -79,11 +97,16 @@ export default Home = () => {
         })}
       </Categories>
 
-      {/* <Games
-        data={games}
+      <Games
+        data={games.filter(
+          (game) =>
+            game.category.includes(selectedCategory) ||
+            selectedCategory === 'All'
+        )}
         keyExtractor={(item) => String(item.id)}
         renderItem={({ item }) => GameItem(item)}
-      /> */}
+        ref={gamesRef}
+      />
     </Container>
   );
 };
