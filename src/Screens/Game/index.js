@@ -6,6 +6,15 @@ import {
   GameContainer,
   GameArtContainer,
   GameArt,
+  GameInfo,
+  Description,
+  GameStatsContainer,
+  ScreenShot,
+  ScreenShotContainer,
+  ScreenShots,
+  ScreenShotsContainer,
+  Stars,
+  ScreenShotsTitle,
   BackButton,
   GameInfoContainer,
   GameThumbContainer,
@@ -16,14 +25,14 @@ import {
 import Text from '../../components/Text';
 
 export default Game = ({ route, navigation }) => {
-  const { games } = route.params;
+  const { game } = route.params;
 
   const renderStars = () => {
     let stars = [];
 
     for (let s = 1; s <= 5; s++) {
       stars.push(
-        <Icon
+        <Ionicons
           key={s}
           name='ios-star'
           size={16}
@@ -37,50 +46,69 @@ export default Game = ({ route, navigation }) => {
   };
 
   return (
-    <GameContainer>
-      <StatusBar backgroundColor='#040617' barStyle='light-content' />
+    <>
+      <StatusBar translucent backgroundColor='transparent' />
+      <GameContainer>
+        <GameArtContainer>
+          <GameArt source={game.cover} />
+          <BackButton onPress={() => navigation.goBack()}>
+            <Ionicons name='ios-close' size={48} color='#FFF' />
+          </BackButton>
+        </GameArtContainer>
 
-      <GameArtContainer>
-        <GameArt source={games.cover} />
-        <BackButton onPress={() => navigation.goBack()}>
-          <Ionicons name='ios-close' size={42} color='#FFF' />
-        </BackButton>
-      </GameArtContainer>
+        <GameInfoContainer>
+          <GameThumbContainer>
+            <GameThumb source={game.cover} />
+          </GameThumbContainer>
+          <GameInfo>
+            <Text heavy medium>
+              {game.title}
+            </Text>
+            <Text color='#9a9a9a'>{game.teaser}</Text>
+          </GameInfo>
+          <Download onPress={() => {}}>
+            <Ionicons name='md-cloud-download' size={24} color='#fff' />
+          </Download>
+        </GameInfoContainer>
 
-      <GameInfoContainer>
-        <GameThumbContainer>
-          <GameThumb source={games.cover} />
-        </GameThumbContainer>
-        <GameInfo>
-          <Text heavy medium>
-            {game.title}
+        <GameStatsContainer>
+          {renderStars()}
+          <Text heavy color='#9a9a9a'>
+            {game.rating}
           </Text>
-          <Text color='#9a9a9a'>{game.teaser}</Text>
-        </GameInfo>
-        <Download>
-          <Ionicons name='md-cloud-download' size={24} color='#fff' />
-        </Download>
-      </GameInfoContainer>
+          <Text bold color='#9a9a9a'>
+            {game.category[0]}
+          </Text>
+          <Text bold color='#9a9a9a'>
+            {game.age}
+          </Text>
+          <Text bold color='#9a9a9a'>
+            Game of the day
+          </Text>
+        </GameStatsContainer>
 
-      <GameStatsContainer>
-        {renderStars()}
-        <Text heavy color='#9a9a9a'>
-          {game.rating}
-        </Text>
-        <Text bold color='#9a9a9a'>
-          {game.category[0]}
-        </Text>
-        <Text bold color='#9a9a9a'>
-          {game.age}
-        </Text>
-        <Text bold color='#9a9a9a'>
-          Game of the day
-        </Text>
-      </GameStatsContainer>
+        <ScreenShotsTitle>
+          <Text heavy medium>
+            Screenshots
+          </Text>
+        </ScreenShotsTitle>
 
-      <Description medium color='#9a9a9a'>
-        {game.description}
-      </Description>
-    </GameContainer>
+        <ScreenShotsContainer>
+          <ScreenShots horizontal={true} showsHorizontalScrollIndicator={false}>
+            {game.screenshots.map((screenshot, index) => {
+              return (
+                <ScreenShotContainer key={index}>
+                  <ScreenShot source={screenshot} />
+                </ScreenShotContainer>
+              );
+            })}
+          </ScreenShots>
+        </ScreenShotsContainer>
+
+        <Description medium color='#9a9a9a'>
+          {game.description}
+        </Description>
+      </GameContainer>
+    </>
   );
 };

@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export const GameContainer = styled.View`
+import Text from '../../components/Text';
+
+export const GameContainer = styled.ScrollView`
   flex: 1;
   background-color: #040617;
 `;
@@ -16,8 +18,8 @@ export const GameArt = styled.Image`
 `;
 export const BackButton = styled.TouchableOpacity`
   position: absolute;
-  top: 48px;
-  left: 16px;
+  top: 28px;
+  left: 26px;
 `;
 
 export const GameInfoContainer = styled.View`
@@ -59,6 +61,12 @@ export const Stars = styled.View`
   flex-direction: row;
 `;
 
+export const ScreenShotsTitle = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 18px 16px;
+`;
+
 export const ScreenShotsContainer = styled.View`
   margin: 8px 0;
 `;
@@ -66,7 +74,7 @@ export const ScreenShotsContainer = styled.View`
 export const ScreenShots = styled.ScrollView``;
 
 export const ScreenShotContainer = styled.View`
-  padding: 16px;
+  padding: 6px;
   shadow-color: #000000;
   shadow-offset: 1px 1px;
   shadow-opacity: 0.5;
@@ -82,4 +90,5 @@ export const ScreenShot = styled.Image`
 export const Description = styled(Text)`
   margin: 0 16px;
   line-height: 22px;
+  padding-bottom: 22px;
 `;
