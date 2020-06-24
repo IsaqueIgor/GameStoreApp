@@ -75,7 +75,6 @@ export default Home = ({ navigation }) => {
   return (
     <Container>
       <StatusBar backgroundColor='#040617' barStyle='light-content' />
-
       <Header>
         <Text large>
           Hello, <Text large>Isaque</Text>
@@ -83,7 +82,10 @@ export default Home = ({ navigation }) => {
           <Text>Top Best Games for you</Text>
         </Text>
 
-        <Avatar source={require('../../assets/avatar.png')} />
+        <Avatar
+          onPress={() => navigation.navigate('Profile')}
+          source={require('../../assets/avatar.png')}
+        />
       </Header>
 
       <Categories horizontal={true} showHoriontalScrollIndicator={false}>

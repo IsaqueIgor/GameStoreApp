@@ -19,7 +19,7 @@ export const SearchContainer = styled.View`
 `;
 
 export const Search = styled.TextInput`
-  padding: 16px 44px 16px 32px;
+  padding: 12px 44px 12px 32px;
   color: #c6c6c6;
 `;
 

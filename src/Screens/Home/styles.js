@@ -10,7 +10,7 @@ export const Header = styled.SafeAreaView`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin: 16px 32px 0 32px;
+  margin: 56px 32px 0 32px;
 `;
 
 export const Avatar = styled.Image`
