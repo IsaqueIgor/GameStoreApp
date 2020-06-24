@@ -19,9 +19,9 @@ import {
 import Text from '../../components/Text';
 import categoriesList from '../../mocks/categories';
 
-import game from '../../mocks/games';
+import games from '../../mocks/games';
 
-export default Home = () => {
+export default Home = ({ navigation }) => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   //const [games, setGames] = useState([]);
   const gamesRef = useRef();
@@ -56,7 +56,7 @@ export default Home = () => {
 
   const GameItem = (game) => {
     return (
-      <Game onPress={() => {}}>
+      <Game onPress={() => navigation.navigate('Game', { game: game })}>
         <GameCover source={game.cover} />
         <GameInfo backgroundColor={game.backgroundColor}>
           <GameImage source={game.cover} />
